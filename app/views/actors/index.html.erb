@@ -1,6 +1,17 @@
-<ul>
+<ul class="actors">
 <% @actors.each do |a| %>
-	
-	<li><%= link_to a.name, actor_path(a) %></li>
+
+<li>
+
+<% if a.image_path.nil? %>
+
+
+<% else %>
+
+	<%= link_to (image_tag "http:" + a.image_path), actor_path(a) %>
+
 <% end %>
+</li>
+<% end %>
+
 </ul>
