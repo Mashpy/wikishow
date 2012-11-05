@@ -1,0 +1,15 @@
+<%= provide(:title, @actor.name) %>
+
+<h1><%= @actor.name %></h2>
+<h3>Born On: <%= @actor.dateborn.strftime("%B %d, %Y") %></h3>
+<h3>Age: <%= get_age(@actor.dateborn) %></h3>
+
+<% if @actor.image_path.nil? %>
+
+	<p>No image available from Wikipedia</p>
+
+<% else %>
+
+	<%= image_tag "http:" + @actor.image_path %>
+
+<% end %>

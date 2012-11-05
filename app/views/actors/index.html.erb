@@ -1,0 +1,6 @@
+<ul>
+<% @actors.each do |a| %>
+	
+	<li><%= link_to a.name, actor_path(a) %></li>
+<% end %>
+</ul>
