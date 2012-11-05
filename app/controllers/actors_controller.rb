@@ -1,7 +1,8 @@
 class ActorsController < ApplicationController
 
 	def index
-		@actors = Actor.order(:name)
+		@actors = Actor.search(params[:search])
+
 	end
 
 	def show
