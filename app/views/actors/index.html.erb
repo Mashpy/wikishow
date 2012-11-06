@@ -8,24 +8,47 @@
 	<% end %>
 </div>
 
-<ul class="actors">
-
 <% if @actors.any? %>
 
-	<% @actors.each do |a| %>
-
-		<li>
-			<% if a.image_path.nil? %>
-
-
-			<% else %>
-
-				<%= link_to (image_tag "http:" + a.image_path), actor_path(a) %>
-
-			<% end %>
-		</li>
-	<% end %>
-
+<div id="divactors">
+	<div class="page">
+		<ul class="actors">
+			<%= render @actors %>
+		</ul>
+	</div>
+</div>
+	
 <% end %>
 
-</ul>
+<script type="text/javascript">
+(function() {
+  var page = 1,
+      loading = false;
+
+  function nearBottomOfPage() {
+    return $(window).scrollTop() > $(document).height() - $(window).height() - 200;
+  }
+
+  $(window).scroll(function(){
+    if (loading) {
+      return;
+    }
+
+    if(nearBottomOfPage()) {
+      loading=true;
+      page++;
+      $.ajax({
+        url: '/actors?page=' + page,
+        type: 'get',
+        dataType: 'script',
+        success: function() {
+          $(window).sausage('draw');
+          loading=false;
+        }
+      });
+    }
+  });
+
+  $(window).sausage();
+}());
+</script>

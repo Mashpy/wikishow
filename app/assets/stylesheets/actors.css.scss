@@ -7,7 +7,8 @@ ul.actors {
 	li img {
 		float: left;
 		margin: 10px;
-		border: 5px solid #fff;
+		border: 10px solid #000;
+		border-radius: 10px;
 
 		-webkit-transition: box-shadow 0.5s ease;
  	    -moz-transition: box-shadow 0.5s ease;
