@@ -5,10 +5,12 @@ class Actor < ActiveRecord::Base
 
 	attr_accessible :name, :dateborn, :image_path
 
-	def self.search(search, page)
-		paginate :per_page => 10, :page => page,
-				 :conditions => ['name LIKE ? AND image_path != ?', "%#{search}%", 'nil'],
-				 :order => 'name'
+	def self.search(search)
+		if search && !search.blank?
+			find(:all, :conditions => ['name LIKE ? AND image_path != ?', "%#{search}%", 'nil'])
+		else
+			find(:all, :conditions => ['image_path != ?', 'nil'])
+		end
 	
 	end
 end

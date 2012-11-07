@@ -1,0 +1,19 @@
+<div class="search-form">
+	<%= form_tag actors_path, :method => 'get' do %>
+
+		<p><%= text_field_tag :search, params[:search], :placeholder => "Enter an actor's name..." %></p>
+		<p><%= submit_tag "Search", :name => nil %></p>
+
+
+	<% end %>
+</div>
+
+<% if @actors.any? %>
+	<div id="actors">
+		<div class="page">
+		<ul class="actors">
+			<%= render @actors %>
+		</ul>
+		</div>
+	</div>
+<% end %>
