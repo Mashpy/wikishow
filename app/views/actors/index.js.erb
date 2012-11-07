@@ -1,1 +1,1 @@
-$(".actor").last().append("<%= escape_javascript(render(@actors)) %>");
+$(".actor").last().parent().append("<%= escape_javascript(render(@actors)) %>");

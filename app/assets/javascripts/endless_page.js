@@ -15,7 +15,7 @@
       loading=true;
       page++;
       $.ajax({
-        url: '/actors.js?page=' + page,
+        url: '/actors?page=' + page,
         type: 'get',
         dataType: 'script',
         success: function() {
