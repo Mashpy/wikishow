@@ -11,7 +11,7 @@ class Actor < ActiveRecord::Base
 
 	def self.search(search)
 		if search && !search.blank?
-			find(:all, :conditions => ['name LIKE ? AND image_path != ?', "%#{search}%", 'nil'])
+			find(:all, :conditions => ['(first_name LIKE ? OR last_name LIKE ?) AND image_path != ?', "%#{search}%", "%#{search}%", 'nil'])
 		else
 			find(:all, :conditions => ['image_path != ?', 'nil'])
 		end
