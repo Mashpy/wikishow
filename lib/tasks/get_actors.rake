@@ -3,13 +3,11 @@ desc "Get some actors from wikipedia"
 task :get_actors => :environment do 
 	require 'nokogiri'
 	require 'open-uri'
-	require 'mechanize'
-	require 'set'
 
 	unwantedlinksarr = ["See also", "References", "Notes", "Footnotes"]
 	newlinks = []
 
-	url = "http://en.wikipedia.org/wiki/List_of_Iranian_actresses"
+	url = "http://en.wikipedia.org/wiki/List_of_Italian_American_actors"
 	doc = Nokogiri::HTML(open(url))
 
 	#Get the category list of actors
@@ -28,13 +26,12 @@ task :get_actors => :environment do
 
 	#Save each actor to the database
 	newlinks.each do |link|
-		puts "http://en.wikipedia.org" + link
 		page = Nokogiri::HTML(open("http://en.wikipedia.org" + link))
 		
 		actor = Actor.new
 		actor.name = page.at_css(".firstHeading").text unless page.at_css(".firstHeading") == nil
 		actor.dateborn = page.css(".infobox").css("span.bday").text unless page.css(".infobox").css("span.bday") == nil
-		actor.image_path = page.css(".infobox").css("img").first['src'] unless page.css(".infobox").css("img").first == nil
+		actor.image_path = page.css(".infobox").at_css("img")['src'] unless page.css(".infobox").at_css("img") == nil
 		
 		if actor.name && actor.dateborn
 			actor.save

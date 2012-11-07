@@ -1,13 +1,16 @@
 class ActorsController < ApplicationController
 
 	def index
-		@actors = Actor.search(params[:search])
-
+		#@actors = Actor.search(params[:search], params[:page])
+		@actors = Actor.page(params[:page]).per(10)
+		respond_to do |format|
+			format.js
+			format.html
+		end
 	end
 
 	def show
 		@actor = Actor.find(params[:id])
 	end
-
 
 end

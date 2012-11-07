@@ -1,0 +1,7 @@
+<% unless actor.image_path.nil? %>
+<div class="actor">	
+	<li>
+		<%= link_to (image_tag ("http:" + actor.image_path), width: '120', height: '140'), actor_path(actor) %>
+	</li>
+</div>
+<% end %>
