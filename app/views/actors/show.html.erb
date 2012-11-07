@@ -1,6 +1,6 @@
-<%= provide(:title, @actor.name) %>
+<%= provide(:title, @actor.fullname) %>
 
-<h1><%= @actor.name %></h2>
+<h1><%= @actor.fullname %></h2>
 <h3>Born On: <%= @actor.dateborn.strftime("%B %d, %Y") %></h3>
 <h3>Age: <%= get_age(@actor.dateborn) %></h3>
 

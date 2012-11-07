@@ -1,7 +1,11 @@
 class Actor < ActiveRecord::Base
 
 	extend FriendlyId
-	friendly_id :name, :use => :slugged
+	friendly_id :fullname, :use => :slugged
+
+	def fullname
+		"#{first_name} #{last_name}"
+	end
 
 	attr_accessible :name, :dateborn, :image_path
 

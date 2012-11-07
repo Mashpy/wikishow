@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105183232) do
+ActiveRecord::Schema.define(:version => 20121107202200) do
 
   create_table "actors", :force => true do |t|
-    t.string   "name"
     t.datetime "dateborn"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "image_path"
     t.string   "slug"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "actors", ["slug"], :name => "index_actors_on_slug"

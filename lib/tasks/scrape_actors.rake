@@ -3,6 +3,9 @@ desc "Get some actors from wikipedia"
 task :scrape_actors => :environment do 
 	require 'nokogiri'
 	require 'open-uri'
+	require 'application_helper'
+
+	include ApplicationHelper
 
 	unwantedlinksarr = ["See also", "References", "Notes", "Footnotes"]
 	newlinks = []
@@ -29,12 +32,20 @@ task :scrape_actors => :environment do
 		page = Nokogiri::HTML(open("http://en.wikipedia.org" + link))
 		
 		actor = Actor.new
-		actor.name = page.at_css(".firstHeading").text unless page.at_css(".firstHeading") == nil
+		
+		splitarr = [];
+		fullname = page.at_css(".firstHeading").text unless page.at_css(".firstHeading") == nil
+
+		if fullname
+			splitarr = split(fullname)
+			actor.first_name = splitarr[0]
+			actor.last_name = splitarr[1]
+		end
+
 		actor.dateborn = page.css(".infobox").css("span.bday").text unless page.css(".infobox").css("span.bday") == nil
 		actor.image_path = page.css(".infobox").at_css("img")['src'] unless page.css(".infobox").at_css("img") == nil
-		puts actor.dateborn
 
-		if actor.name && actor.dateborn
+		if actor.first_name && actor.last_name && actor.dateborn
 			actor.save
 		end
 	end
