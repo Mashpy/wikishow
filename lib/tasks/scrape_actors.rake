@@ -33,13 +33,12 @@ task :scrape_actors => :environment do
 		
 		actor = Actor.new
 		
-		splitarr = [];
 		fullname = page.at_css(".firstHeading").text unless page.at_css(".firstHeading") == nil
 
 		if fullname
-			splitarr = split(fullname)
-			actor.first_name = splitarr[0]
-			actor.last_name = splitarr[1]
+			split = split(fullname)
+			actor.first_name = split[0]
+			actor.last_name = split[1]
 		end
 
 		actor.dateborn = page.css(".infobox").css("span.bday").text unless page.css(".infobox").css("span.bday") == nil
