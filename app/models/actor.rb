@@ -1,9 +1,9 @@
 class Actor < ActiveRecord::Base
 
 	extend FriendlyId
-	friendly_id :fullname, :use => :slugged
+	friendly_id :full_name, :use => :slugged
 
-	def fullname
+	def full_name
 		"#{first_name} #{last_name}"
 	end
 
